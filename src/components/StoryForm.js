@@ -1,27 +1,31 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import FileBase from 'react-file-base64';
 
+import { createStory } from '../actions/stories';
 const StoryForm = ({ addStory, toggleVisibleForm }) => {
 	const [formData, setFormData] = useState({
 		title: '',
 		parent: '',
 		description: '',
 		tags: '',
-		image: '',
+		selectedFile: '',
 	});
+	const dispatch = useDispatch();
 
 	const handleSubmit = (e) => {
 		// e.preventDefault();
-		const newStory = {
-			title: formData.title,
-			image: formData.image,
-			description: formData.description,
-		};
-		setFormData({
-			title: '',
-			image: '',
-			description: '',
-		});
+		dispatch(createStory(formData));
+		// const newStory = {
+		// 	title: formData.title,
+		// 	image: formData.image,
+		// 	description: formData.description,
+		// };
+		// setFormData({
+		// 	title: '',
+		// 	image: '',
+		// 	description: '',
+		// });
 		//     fetch("http://localhost:5000/stories", {
 		//       method: "Post",
 		//       headers: {
@@ -40,19 +44,19 @@ const StoryForm = ({ addStory, toggleVisibleForm }) => {
 		});
 	};
 
-  const handleTagChange = (e) => {
+	const handleTagChange = (e) => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value.split(','),
 		});
 	};
 
-  const handleImageLoad = (base64) => {
-		setFormData({
-			...formData,
-			image: base64,
-		});
-	};
+	// const handleImageLoad = (base64) => {
+	// 	setFormData({
+	// 		...formData,
+	// 		image: base64,
+	// 	});
+	// };
 
 	return (
 		<div className="story-content">
@@ -75,23 +79,31 @@ const StoryForm = ({ addStory, toggleVisibleForm }) => {
 				<input
 					type="text"
 					name="description"
-          value={formData.description}
+					value={formData.description}
 					placeholder="Story Description"
 					onChange={handleChange}
 				/>
-				<input
+				{/* <input
 					type="text"
 					name="tags"
-          value={formData.tags}
+					value={formData.tags}
 					placeholder="Story Tags"
 					onChange={handleTagChange}
-				/>
-				<FileBase
+				/> */}
+				{/* <FileBase
 					type="file"
           multiple={false}
 					name={formData.image}
 					placeholder="Image URL"
 					onDone={handleImageLoad}
+				/> */}
+
+				<FileBase
+					type="file"
+					multiple={false}
+					onDone={({ base64 }) =>
+						setFormData({ ...formData, selectedFile: base64 })
+					}
 				/>
 			</form>
 			<button
