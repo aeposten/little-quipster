@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  color: rgb(255, 255, 255);
+}
+
+nav {
+  height: 45px;
+  width: 100%;
+  background-color: rgb(58, 134, 255);
+  position: fixed;
+  top: 0;
+
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: rgb(0, 54, 158);
+}
+
+main {
+    margin-top: 40px;
+}
+
+button {
+  background-color: rgb(58, 134, 255);
+  font-family: "Pacifico", cursive;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 4px;
+  margin: 4px;
+  padding: 4px;
+}
+
+::placeholder {
+  color: rgb(0, 54, 158); 
+}
+
+
+.nav li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.story-pic {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 5px solid rgb(58, 134, 255);
+}
+
+.story-list {
+  height: 200px;
+  width: 200px;
+  list-style: none;
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 10px;
+}
+
+.story-name {
+  text-align: center;
+  width: 200px;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+
+.title {
+  text-align: right;
+  font-family: "Pacifico", cursive;
+  font-size: 30px;
+  margin: 0px;
+  -webkit-text-stroke: 1px rgb(255, 255, 255),;
+  color: rgb(58, 134, 255);
+  text-shadow:  
+    -1px -1px 0 rgb(255, 255, 255),
+    1px -1px 0 rgb(255, 255, 255), 
+    -1px 1px 0 rgb(255, 255, 255),
+    1px 1px 0 rgb(255, 255, 255);
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(109, 109, 109, 0.7);
+}
+
+.story-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: rgb(58, 134, 255);;
+  padding: 14px 28px;
+  border-radius: 6px;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.small-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255)
+}
+.story-content {
+  display: inline-block;
+}
+
+.story-info-modal {
+    position: absolute;
+}
+
+.name-info {
+  font-family: "Pacifico", cursive;
+  text-align: center;
+}
+
+.search {
+  color: rgb(255, 255, 255);; 
+  border:solid 2px rgb(255, 255, 255);
+  border-radius: 4px;
+  background-color: rgb(58, 134, 255);
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.search input {
+  margin-right: 10px;
+    color: rgb(255, 255, 255); 
+    border: solid 2px rgb(255, 255, 255);
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.search input::placeholder{
+  color: rgb(255, 255, 255);; 
+  border:solid 2px rgb(255, 255, 255);
+  background-color: rgb(58, 134, 255);
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.story-form input {
+  margin-right: 10px;
+    color: rgb(0, 54, 158); 
+    border:none;
+    border-bottom: solid 2px rgb(255, 255, 255);
+    border-radius: 2px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.story-form input::placeholder{
+  color: rgb(0, 54, 158); 
+  border:none;
+  background-color: rgb(58, 134, 255);
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.add-story {
+  font-family: "Pacifico", cursive;
+}
+
+.delete {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
