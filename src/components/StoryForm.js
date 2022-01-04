@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import FileBase from 'react-file-base64';
 
 const StoryForm = ({ addStory, toggleVisibleForm }) => {
 	const [formData, setFormData] = useState({
@@ -79,17 +80,18 @@ const StoryForm = ({ addStory, toggleVisibleForm }) => {
 					onChange={handleChange}
 				/>
 				<input
-					type="file"
+					type="text"
 					name="tags"
           value={formData.tags}
 					placeholder="Story Tags"
 					onChange={handleTagChange}
 				/>
-				<input
-					type="text"
-					name="image"
+				<FileBase
+					type="file"
+          multiple={false}
+					name={formData.image}
 					placeholder="Image URL"
-					onChange={handleImageLoad}
+					onDone={handleImageLoad}
 				/>
 			</form>
 			<button

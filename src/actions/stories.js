@@ -9,3 +9,11 @@ export const getStories = () => async (dispatch) => {
         console.log(error.message)
     }
 }
+
+export const createStory = () => async(dispatch) => {
+    try {
+
+    } catch {
+
+    }
+}

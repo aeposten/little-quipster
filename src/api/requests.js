@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-
+const allStoriesURL = 'http://localhost:5000/stories'
 
 
 export const fetchStories = () => axios.get(url);
