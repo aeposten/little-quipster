@@ -18,17 +18,6 @@ const StoryInfo = ({
 		if (story) setFormData(story);
 	}, [story]);
 
-	const resetForm = () => {
-		setCurrentId(0);
-		setFormData({
-			title: '',
-			parent: '',
-			description: '',
-			selectedFile: '',
-			laughs: '',
-		});
-	};
-
 	return (
 		<div className="story-content">
 			<li>
@@ -44,40 +33,28 @@ const StoryInfo = ({
 			<li>Description: {story.description}</li>
 			<li>Submitted by: {story.parent}</li>
 			<p>{moment(story.createdAt).fromNow()}</p>
-			<p onClick={() => dispatch(addLaughs(story._id))}>😂{story.laughs} </p>
-			<button
-				onClick={() => {
-					setCurrentId(story._id);
-					dispatch(updateStory(currentId, formData));
-					toggleVisibleModal();
-					toggleVisibleForm();
-					// resetForm();
-				}}
-			>
-				Edit Story
-			</button>
-
+			<p onClick={() => dispatch(addLaughs(story._id))}>
+				😂{story.laughs}
+				<button
+					onClick={() => {
+						setCurrentId(story._id);
+						dispatch(updateStory(currentId, formData));
+						toggleVisibleModal();
+						toggleVisibleForm();
+					}}
+				>
+					Edit Story
+				</button>
+			</p>
 			<li>
 				<button
 					className="delete"
 					onClick={() => {
 						dispatch(deleteStory(story._id));
 						toggleVisibleModal();
-						resetForm();
 					}}
 				>
 					Delete Story
-				</button>
-			</li>
-			<li>
-				<button
-					className="delete"
-					onClick={() => {
-						resetForm();
-						toggleVisibleModal();
-					}}
-				>
-					Exit
 				</button>
 			</li>
 		</div>

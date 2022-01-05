@@ -20,10 +20,19 @@ export default function StoryCard({
 		setInfoVisible(!infoVisible);
 	};
 
-
+	const resetForm = () => {
+		setCurrentId(0);
+		setFormData({
+			title: '',
+			parent: '',
+			description: '',
+			selectedFile: '',
+			laughs: '',
+		});
+	};
 	return (
 		<div className="story-list">
-			<li onClick={toggleVisibleModal}>
+			<li onClick={() => {toggleVisibleModal();}}>
 				<img src={story.selectedFile} alt={story.title} className="story-pic" />
 				<h4 className="story-name">{story.title}</h4>
         			</li>

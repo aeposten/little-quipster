@@ -84,6 +84,15 @@ const StoryForm = ({
 			>
 				Submit
 			</button>
+			<button
+				className="delete"
+				onClick={() => {
+					resetForm();
+					toggleVisibleForm();
+				}}
+			>
+				Exit
+			</button>
 		</div>
 	);
 };
