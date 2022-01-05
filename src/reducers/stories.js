@@ -1,17 +1,16 @@
-import { getStories } from '../actions/stories';
-
+import { FETCH_ALL, CREATE, UPDATE, LAUGH, DELETE } from '../actions/actions'
 export default (allStories = [], action) => {
 	switch (action.type) {
-		case 'FETCH_ALL':
+		case FETCH_ALL:
 			return action.payload;
-		case 'CREATE':
+		case CREATE:
 			return [...allStories, action.payload];
-		case 'UPDATE':
-		case 'LAUGH':
+		case UPDATE:
+		case LAUGH:
 			return allStories.map((story) =>
 				story._id === action.payload._id ? action.payload : story
 			);
-		case 'DELETE':
+		case DELETE:
 			return allStories.filter((story) => story._id !== action.payload)
 		default:
 			return allStories;

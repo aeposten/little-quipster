@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import {Link} from "react-router-dom";
+import React, { useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login';
 
 const Login = ({ handleLogin, user }) => {
+	const dispatch = useDispatch();
+	const history= useHistory();
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
@@ -12,9 +16,9 @@ const Login = ({ handleLogin, user }) => {
 		password: formData.password,
 	};
 
-	const resetForm = () => {
-		setFormData({ username: '', password: '' });
-	};
+	// const resetForm = () => {
+	// 	setFormData({ username: '', password: '' });
+	// };
 
 	const handleChange = (e) => {
 		setFormData({
@@ -23,9 +27,21 @@ const Login = ({ handleLogin, user }) => {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e) => {};
+	const googleLoginSuccess = (res) => {
+		const result = res?.profileObj;
+		const token = res?.tokenId;
+		try {
+			dispatch({ type: 'AUTH', data: { result, token } });
+			history.push('/')
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
+	const googleLoginFailure = () => {
+		console.log('Signin unsuccessful');
+	};
 	return (
 		<>
 			<h2>Login!</h2>
@@ -62,6 +78,20 @@ const Login = ({ handleLogin, user }) => {
 						<button>Sign Up</button>
 					</Link>
 				</p>
+				<GoogleLogin
+					clientId="786428800759-60p6ne9kbnq8b1clq71k932f39fijofq.apps.googleusercontent.com"
+					render={(renderProps) => (
+						<button
+							onClick={renderProps.onClick}
+							disabled={renderProps.disabled}
+						>
+							Sign In With Google!
+						</button>
+					)}
+					onSuccess={googleLoginSuccess}
+					onFailure={googleLoginFailure}
+					cookiePolicy="single_host_origin"
+				/>
 			</form>
 		</>
 	);

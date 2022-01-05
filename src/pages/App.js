@@ -10,7 +10,7 @@ import StoryList from './StoryList';
 import About from './About';
 import Login from '../components/Login';
 import Register from '../components/Register';
-
+import Profile from './Profile';
 function App() {
 	const [currentId, setCurrentId] = useState(0);
 	const [formVisible, setFormVisible] = useState(false);
@@ -61,6 +61,9 @@ function App() {
 				</p>
 				<p>
 					<Route path="/register" exact component={Register} />
+				</p>
+				<p>
+					<Route path="/profile" exact component={Profile} />
 				</p>
 				{formVisible && (
 					<>

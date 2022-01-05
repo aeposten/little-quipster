@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login';
 
 const Register = ({ handleLogin, user }) => {
+	const dispatch = useDispatch();
+	const history = useHistory();
 	const [formData, setFormData] = useState({
 		first_name: '',
 		Last_name: '',
 		email: '',
-		username: '',
 		password: '',
 		password_confirmation: '',
 		avatar: '',
@@ -15,10 +19,8 @@ const Register = ({ handleLogin, user }) => {
 		first_name: formData.first_name,
 		last_name: formData.last_name,
 		email: formData.email,
-		username: formData.username,
 		password: formData.password,
 		password_confirmation: formData.password_confirmation,
-		avatar: formData.avatar,
 	};
 
 	const resetForm = () => {
@@ -29,7 +31,6 @@ const Register = ({ handleLogin, user }) => {
 			username: '',
 			password: '',
 			password_confirmation: '',
-			avatar: '',
 		});
 	};
 
@@ -40,23 +41,21 @@ const Register = ({ handleLogin, user }) => {
 		});
 	};
 
-	const handleSubmit = (e) => {
-		// e.preventDefault();
-		// fetch('/register', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// 	body: JSON.stringify(newUser),
-		// }).then((response) => {
-		// 	if (response.ok) {
-		// 		response.json().then((user) => handleLogin(user));
-		// 		console.log(newUser);
-		// 		resetForm();
-		// 	}
-		// });
+	const handleSubmit = (e) => {};
+	const googleLoginSuccess = (res) => {
+		const result = res?.profileObj;
+		const token = res?.tokenId;
+		try {
+			dispatch({ type: 'AUTH', data: { result, token } });
+			history.push('/');
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
+	const googleLoginFailure = () => {
+		console.log('Signin unsuccessful');
+	};
 	return (
 		<>
 			<h1>Register</h1>
@@ -88,15 +87,6 @@ const Register = ({ handleLogin, user }) => {
 				</p>
 				<p>
 					<input
-						type="text"
-						name="username"
-						placeholder="Username"
-						value={formData.username}
-						onChange={handleChange}
-					/>
-				</p>
-				<p>
-					<input
 						type="password"
 						name="password"
 						placeholder="Password"
@@ -121,6 +111,22 @@ const Register = ({ handleLogin, user }) => {
 					>
 						Submit
 					</button>
+				</p>
+				<p>
+					<GoogleLogin
+						clientId="786428800759-60p6ne9kbnq8b1clq71k932f39fijofq.apps.googleusercontent.com"
+						render={(renderProps) => (
+							<button
+								onClick={renderProps.onClick}
+								disabled={renderProps.disabled}
+							>
+								Sign In With Google!
+							</button>
+						)}
+						onSuccess={googleLoginSuccess}
+						onFailure={googleLoginFailure}
+						cookiePolicy="single_host_origin"
+					/>
 				</p>
 			</form>
 		</>
