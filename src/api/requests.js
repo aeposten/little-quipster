@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const allStoriesURL = 'http://localhost:5000/stories'
+const allStoriesURL = 'https://little-quipster-back.herokuapp.com/stories'
 
 
 export const fetchStories = () => axios.get(allStoriesURL);
