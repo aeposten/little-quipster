@@ -2,40 +2,18 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FileBase from 'react-file-base64';
 
-import { createStory } from '../actions/stories';
-const StoryForm = ({ addStory, toggleVisibleForm }) => {
-	const [formData, setFormData] = useState({
-		title: '',
-		parent: '',
-		description: '',
-		tags: '',
-		selectedFile: '',
-	});
+import { createStory, updateStory } from '../actions/stories';
+const StoryForm = ({ toggleVisibleForm, currentId, setCurrentId, formData, setFormData }) => {
+
 	const dispatch = useDispatch();
 
-	const handleSubmit = (e) => {
-		// e.preventDefault();
-		dispatch(createStory(formData));
-		// const newStory = {
-		// 	title: formData.title,
-		// 	image: formData.image,
-		// 	description: formData.description,
-		// };
-		// setFormData({
-		// 	title: '',
-		// 	image: '',
-		// 	description: '',
-		// });
-		//     fetch("http://localhost:5000/stories", {
-		//       method: "Post",
-		//       headers: {
-		//         "Content-Type": "application/json",
-		//       },
-		//       body: JSON.stringify(newStory),
-		//     })
-		//       .then((response) => response.json())
-		//       .then(addStory);
-	};
+	const handleSubmit = () => {
+		if (currentId === 0) {
+			dispatch(createStory(formData));
+		  } else {
+			dispatch(updateStory(currentId, formData));
+		
+	}};
 
 	const handleChange = (e) => {
 		setFormData({
@@ -44,23 +22,10 @@ const StoryForm = ({ addStory, toggleVisibleForm }) => {
 		});
 	};
 
-	const handleTagChange = (e) => {
-		setFormData({
-			...formData,
-			[e.target.name]: e.target.value.split(','),
-		});
-	};
-
-	// const handleImageLoad = (base64) => {
-	// 	setFormData({
-	// 		...formData,
-	// 		image: base64,
-	// 	});
-	// };
 
 	return (
 		<div className="story-content">
-			<h4 className="add-story">Add New Story</h4>
+			<h4 className="add-story">{currentId ? 'Edit Story' : 'Add New Story' }</h4>
 			<form onSubmit={handleSubmit} className="story-form">
 				<input
 					type="text"
@@ -83,20 +48,6 @@ const StoryForm = ({ addStory, toggleVisibleForm }) => {
 					placeholder="Story Description"
 					onChange={handleChange}
 				/>
-				{/* <input
-					type="text"
-					name="tags"
-					value={formData.tags}
-					placeholder="Story Tags"
-					onChange={handleTagChange}
-				/> */}
-				{/* <FileBase
-					type="file"
-          multiple={false}
-					name={formData.image}
-					placeholder="Image URL"
-					onDone={handleImageLoad}
-				/> */}
 
 				<FileBase
 					type="file"
@@ -110,6 +61,7 @@ const StoryForm = ({ addStory, toggleVisibleForm }) => {
 				onClick={() => {
 					handleSubmit();
 					toggleVisibleForm();
+					setCurrentId();
 				}}
 			>
 				Submit

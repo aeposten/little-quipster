@@ -24,20 +24,6 @@ const Login = ({ handleLogin, user }) => {
 	};
 
 	const handleSubmit = (e) => {
-		// e.preventDefault();
-		// fetch('/login', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// 	body: JSON.stringify(userInfo),
-		// }).then((response) => {
-		// 	if (response.ok) {
-		// 		response.json().then((user) => handleLogin(user));
-		// 		// console.log(userInfo);
-		// 		resetForm();
-		// 	}
-		// });
 	};
 
 	return (

@@ -2,17 +2,12 @@ import StoryForm from "../components/StoryForm";
 import { useState } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-const NavBar = ({ addStory }) => {
-  const [formVisible, setFormVisible] = useState(false);
-  const toggleVisibleForm = () => {
-    setFormVisible(!formVisible);
-  };
+const NavBar = ({ toggleVisibleForm }) => {
 
   return (
     <>
       <nav>
         <ul className="nav">
-          {/* <Router> */}
           <Link className="title" to="/">
             <li className="title">Little Quipster</li>
           </Link>
@@ -26,20 +21,9 @@ const NavBar = ({ addStory }) => {
           <Link to="/Register">
             <li>Register</li>
           </Link>
-          {/* </Router> */}
-          {/* <li>
-            <Search search={search} handleSearch={handleSearch} />
-          </li> */}
+
         </ul>
       </nav>
-      {formVisible && (
-        <>
-          <div className="overlay" onClick={toggleVisibleForm}>
-            {" "}
-          </div>
-          <StoryForm className="story-info-modal" addStory={addStory} toggleVisibleForm={toggleVisibleForm} />
-        </>
-      )}
     </>
   );
 };

@@ -1,9 +1,9 @@
 import NavBar from "./Navbar";
 
-const Header = ({ addPet }) => {
+const Header = ({  toggleVisibleForm }) => {
   return (
     <>
-      <NavBar addPet={addPet} />
+      <NavBar  toggleVisibleForm={toggleVisibleForm} />
     </>
   );
 };

@@ -19,3 +19,14 @@ export const createStory = (story) => async (dispatch) => {
 		console.log(error.message);
 	}
 };
+
+export const updateStory = (id, story) => async (dispatch) => {
+    console.log(story);
+    try {
+		const { data } = await requests.updateStory(id, story);
+
+		dispatch({ type: 'UPDATE', payload: data });
+	} catch (error) {
+		console.log(error.message);
+	}
+};

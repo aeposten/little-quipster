@@ -1,10 +1,16 @@
-export default (stories = [], action) => {
+import { getStories } from '../actions/stories';
+
+export default (allStories = [], action) => {
 	switch (action.type) {
 		case 'FETCH_ALL':
 			return action.payload;
 		case 'CREATE':
-			return [...stories, action.payload];
+			return [...allStories, action.payload];
+		case 'UPDATE':
+			return allStories.map((story) =>
+				story._id === action.payload._id ? action.payload : story
+			);
 		default:
-			return stories;
+			return allStories;
 	}
 };

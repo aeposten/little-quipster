@@ -1,25 +1,56 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import { getStories } from '../actions/stories';
 import Header from '../components/Header';
+import StoryForm from '../components/StoryForm';
 import StoryList from './StoryList';
 import About from './About';
 import Login from '../components/Login';
 import Register from '../components/Register';
 
 function App() {
-	const allStories = useSelector((state) => state.posts);
+	const [currentId, setCurrentId] = useState(null);
+	const [formVisible, setFormVisible] = useState(false);
+	const allStories = useSelector((state) => state.allStories);
+	const [formData, setFormData] = useState({
+		title: '',
+		parent: '',
+		description: '',
+		tags: '',
+		selectedFile: '',
+	});
+
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getStories());
+	}, [currentId, dispatch]);
+
+	const toggleVisibleForm = () => {
+		setFormVisible(!formVisible);
+	};
 	return (
 		<div className="App">
 			<header className="App-header">
-				<Header />
+				<Header
+					toggleVisibleForm={toggleVisibleForm}
+					currentId={currentId}
+					setCurrentId={setCurrentId}
+					formData={formData}
+					setFormData={setFormData}
+				/>
 			</header>
 
 			<main>
 				<Route path="/" exact>
 					<StoryList
-						allStories={allStories}
+						toggleVisibleForm={toggleVisibleForm}
+						currentId={currentId}
+						setCurrentId={setCurrentId}
+						formData={formData}
+						setFormData={setFormData}
 						// handleDelete={handleDelete}
 					/>
 				</Route>
@@ -32,41 +63,25 @@ function App() {
 				<p>
 					<Route path="/register" exact component={Register} />
 				</p>
+				{formVisible && (
+					<>
+						<div className="overlay" onClick={toggleVisibleForm}>
+							{' '}
+						</div>
+						<StoryForm
+							className="story-info-modal"
+							toggleVisibleForm={toggleVisibleForm}
+							currentId={currentId}
+							setCurrentId={setCurrentId}
+							formData={formData}
+							setFormData={setFormData}
+							dispatch={dispatch}
+						/>
+					</>
+				)}
 			</main>
 		</div>
 	);
 }
 
 export default App;
-
-//above return
-// const [allStories, setAllStories] = useState([]);
-// const [user, setUser] = useState(null);
-// const [search, setSearch] = useState("");
-
-// const handleSearch = (e) => {
-//   setSearch(e.target.value.toLowerCase());
-// };
-
-// const addStory = (newStory) => {
-//   setAllStories([...allStories, newStory]);
-// };
-
-// useEffect(() => {
-// fetch("http://localhost:5000/stories")
-// .then((response) => response.json())
-// .then((allStories) => {
-//   setAllStories(allStories);
-// });
-//     dispatch(getAllStories())
-// }, [dispatch]);
-
-// const handleDelete = (deletedStory) => {
-// fetch(`http://localhost:5000/stories/${deletedStory.id}`, {
-//   method: "Delete",
-//   headers: { "Content-Type": "application/json" },
-// }).then(() => {
-//   const updatedStories = allStories.filter((story) => story.id !== deletedStory.id);
-//   setAllStories(updatedStories);
-// });
-// };
