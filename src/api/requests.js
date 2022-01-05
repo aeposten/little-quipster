@@ -7,4 +7,4 @@ export const fetchStories = () => axios.get(allStoriesURL);
 export const createStory = (newStory) => axios.post(allStoriesURL, newStory);
 // export const likeStory = (id) => axios.patch(`${url}/${id}/likeStory`);
 export const updateStory = (id, updatedStory) => axios.patch(`${allStoriesURL}/${id}`, updatedStory);
-// export const deleteStory = (id) => axios.delete(`${url}/${id}`); 
+export const deleteStory = (id) => axios.delete(`${allStoriesURL}/${id}`); 

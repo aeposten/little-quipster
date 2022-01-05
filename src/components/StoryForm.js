@@ -3,17 +3,22 @@ import { useDispatch } from 'react-redux';
 import FileBase from 'react-file-base64';
 
 import { createStory, updateStory } from '../actions/stories';
-const StoryForm = ({ toggleVisibleForm, currentId, setCurrentId, formData, setFormData }) => {
-
+const StoryForm = ({
+	toggleVisibleForm,
+	currentId,
+	setCurrentId,
+	formData,
+	setFormData,
+}) => {
 	const dispatch = useDispatch();
 
 	const handleSubmit = () => {
 		if (currentId === 0) {
 			dispatch(createStory(formData));
-		  } else {
+		} else {
 			dispatch(updateStory(currentId, formData));
-		
-	}};
+		}
+	};
 
 	const handleChange = (e) => {
 		setFormData({
@@ -22,10 +27,22 @@ const StoryForm = ({ toggleVisibleForm, currentId, setCurrentId, formData, setFo
 		});
 	};
 
+	const resetForm = () => {
+		setCurrentId(0);
+		setFormData({
+			title: '',
+			parent: '',
+			description: '',
+			tags: '',
+			selectedFile: '',
+		});
+	};
 
 	return (
 		<div className="story-content">
-			<h4 className="add-story">{currentId ? 'Edit Story' : 'Add New Story' }</h4>
+			<h4 className="add-story">
+				{currentId ? 'Edit Story' : 'Add New Story'}
+			</h4>
 			<form onSubmit={handleSubmit} className="story-form">
 				<input
 					type="text"
@@ -62,6 +79,7 @@ const StoryForm = ({ toggleVisibleForm, currentId, setCurrentId, formData, setFo
 					handleSubmit();
 					toggleVisibleForm();
 					setCurrentId();
+					resetForm();
 				}}
 			>
 				Submit

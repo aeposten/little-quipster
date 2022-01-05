@@ -10,8 +10,8 @@ export const getStories = () => async (dispatch) => {
 };
 
 export const createStory = (story) => async (dispatch) => {
-    console.log(story);
-    try {
+	console.log(story);
+	try {
 		const { data } = await requests.createStory(story);
 
 		dispatch({ type: 'CREATE', payload: data });
@@ -21,11 +21,21 @@ export const createStory = (story) => async (dispatch) => {
 };
 
 export const updateStory = (id, story) => async (dispatch) => {
-    console.log(story);
-    try {
+	console.log(story);
+	try {
 		const { data } = await requests.updateStory(id, story);
 
 		dispatch({ type: 'UPDATE', payload: data });
+	} catch (error) {
+		console.log(error.message);
+	}
+};
+
+export const deleteStory = (id) => async (dispatch) => {
+	try {
+		await requests.deleteStory(id);
+
+		dispatch({ type: 'DELETE', payload: id });
 	} catch (error) {
 		console.log(error.message);
 	}

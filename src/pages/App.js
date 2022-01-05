@@ -12,7 +12,7 @@ import Login from '../components/Login';
 import Register from '../components/Register';
 
 function App() {
-	const [currentId, setCurrentId] = useState(null);
+	const [currentId, setCurrentId] = useState(0);
 	const [formVisible, setFormVisible] = useState(false);
 	const allStories = useSelector((state) => state.allStories);
 	const [formData, setFormData] = useState({

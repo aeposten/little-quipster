@@ -3,7 +3,7 @@ import moment from 'moment';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateStory } from '../actions/stories';
+import { updateStory, deleteStory } from '../actions/stories';
 const StoryInfo = ({
 	story,
 	handleDelete,
@@ -15,9 +15,6 @@ const StoryInfo = ({
 	setFormData,
 }) => {
 	const dispatch = useDispatch();
-	// const currentStory = useSelector((state) =>
-	// 	currentId ? state.allStories.find((currentStory) => currentStory._id === currentId) : console.log('Not current id')
-	// );
 	useEffect(() => {
 		if (story) setFormData(story);
 	}, [story]);
@@ -54,7 +51,7 @@ const StoryInfo = ({
 				<button
 					className="delete"
 					onClick={() => {
-						handleDelete(story);
+						dispatch(deleteStory(story._id))
 						toggleVisibleModal();
 					}}
 				>

@@ -10,6 +10,8 @@ export default (allStories = [], action) => {
 			return allStories.map((story) =>
 				story._id === action.payload._id ? action.payload : story
 			);
+		case 'DELETE':
+			return allStories.filter((story) => story._id !== action.payload)
 		default:
 			return allStories;
 	}
