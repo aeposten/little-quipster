@@ -3,10 +3,9 @@ import moment from 'moment';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateStory, deleteStory } from '../actions/stories';
+import { updateStory, deleteStory, addLaughs } from '../actions/stories';
 const StoryInfo = ({
 	story,
-	handleDelete,
 	toggleVisibleForm,
 	toggleVisibleModal,
 	currentId,
@@ -34,8 +33,8 @@ const StoryInfo = ({
 			<li>Description: {story.description}</li>
 			<li>Submitted by: {story.parent}</li>
 			<p>{moment(story.createdAt).fromNow()}</p>
-			<p>
-				😂{story.laughs.length}
+			<p onClick={() => dispatch(addLaughs(story._id))}>
+				😂{story.laughs}
 				<button
 					onClick={() => {
 						setCurrentId(story._id);

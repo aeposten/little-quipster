@@ -19,8 +19,8 @@ function App() {
 		title: '',
 		parent: '',
 		description: '',
-		tags: '',
 		selectedFile: '',
+		laughs: ''
 	});
 
 	const dispatch = useDispatch();
@@ -51,7 +51,6 @@ function App() {
 						setCurrentId={setCurrentId}
 						formData={formData}
 						setFormData={setFormData}
-						// handleDelete={handleDelete}
 					/>
 				</Route>
 				<p>

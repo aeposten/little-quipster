@@ -5,8 +5,6 @@ import { getStories } from '../actions/stories';
 import StoryCard from '../components/StoryCard';
 
 const StoryList = ({
-	search,
-	handleDelete,
 	toggleVisibleForm,
 	currentId,
 	setCurrentId,
@@ -15,12 +13,11 @@ const StoryList = ({
 }) => {
 	const allStories = useSelector((state) => state.allStories);
 
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getStories());
-	}, [dispatch]);
+	// const dispatch = useDispatch();
+	// useEffect(() => {
+	// 	dispatch(getStories());
+	// }, [dispatch]);
 
-	console.log(allStories);
 
 	return (
 		<ul className="stories">
@@ -41,4 +38,3 @@ const StoryList = ({
 };
 
 export default StoryList;
-// export const fetchStories = () => axios.get(StoryList);

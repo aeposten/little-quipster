@@ -31,6 +31,16 @@ export const updateStory = (id, story) => async (dispatch) => {
 	}
 };
 
+export const addLaughs = (id) => async (dispatch) => {
+	try {
+		const { data } = await requests.addLaughs(id);
+
+		dispatch({ type: 'LAUGH', payload: data });
+	} catch (error) {
+		console.log(error.message);
+	}
+};
+
 export const deleteStory = (id) => async (dispatch) => {
 	try {
 		await requests.deleteStory(id);
@@ -40,3 +50,5 @@ export const deleteStory = (id) => async (dispatch) => {
 		console.log(error.message);
 	}
 };
+
+

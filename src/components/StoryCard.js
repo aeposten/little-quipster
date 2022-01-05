@@ -1,32 +1,33 @@
 import moment from 'moment';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState,  useEffect } from 'react';
+import { addLaughs, updateStory } from '../api/requests';
+import { useSelector, useDispatch } from 'react-redux';
 import StoryInfo from './StoryInfo';
 
 export default function StoryCard({
 	story,
-	handleDelete,
 	toggleVisibleForm,
 	formData,
 	setFormData,
 	currentId,
 	setCurrentId,
 }) {
+
+  const dispatch = useDispatch();
 	const [infoVisible, setInfoVisible] = useState(false);
 
 	const toggleVisibleModal = () => {
 		setInfoVisible(!infoVisible);
 	};
 
+
 	return (
 		<div className="story-list">
 			<li onClick={toggleVisibleModal}>
 				<img src={story.selectedFile} alt={story.title} className="story-pic" />
 				<h4 className="story-name">{story.title}</h4>
-				{/* <p>{story.description}</p>
-        <p>{moment(story.createdAt).fromNow()}</p>
-        <p>😂{story.laughs.length}<button>Edit Story</button></p> */}
-			</li>
+        			</li>
+        <p>😂{story.laughs}</p>
 
 			{infoVisible && (
 				<>
@@ -34,7 +35,6 @@ export default function StoryCard({
 					<StoryInfo
 						className="story-info-modal"
 						story={story}
-						// handleDelete={handleDelete}
 						toggleVisibleModal={toggleVisibleModal}
 						toggleVisibleForm={toggleVisibleForm}
 						formData={formData}

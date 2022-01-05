@@ -7,6 +7,7 @@ export default (allStories = [], action) => {
 		case 'CREATE':
 			return [...allStories, action.payload];
 		case 'UPDATE':
+		case 'LAUGH':
 			return allStories.map((story) =>
 				story._id === action.payload._id ? action.payload : story
 			);

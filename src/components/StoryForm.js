@@ -33,8 +33,8 @@ const StoryForm = ({
 			title: '',
 			parent: '',
 			description: '',
-			tags: '',
 			selectedFile: '',
+			laughs: '',
 		});
 	};
 
