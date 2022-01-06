@@ -17,7 +17,7 @@ function App() {
 	const allStories = useSelector((state) => state.allStories);
 	const [formData, setFormData] = useState({
 		title: '',
-		parent: '',
+		// parent: '',
 		description: '',
 		selectedFile: '',
 		laughs: ''

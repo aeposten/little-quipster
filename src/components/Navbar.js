@@ -8,6 +8,7 @@ const NavBar = ({ toggleVisibleForm }) => {
 	const [parent, setParent] = useState(
 		JSON.parse(localStorage.getItem('profile'))
 	);
+
 	const dispatch = useDispatch();
   const location = useLocation();
 	const history = useHistory();
@@ -38,7 +39,7 @@ const NavBar = ({ toggleVisibleForm }) => {
 
 					{parent ? (
 						<li>
-							<Link to="/profile">Hello {parent?.result.name} </Link>
+							<Link to="/profile">Profile</Link>
 							<button onClick={handleLogout}>Logout</button>
 						</li>
 					) : (

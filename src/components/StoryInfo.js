@@ -18,11 +18,12 @@ const StoryInfo = ({
 		if (story) setFormData(story);
 	}, [story]);
 
+	const parent = JSON.parse(localStorage.getItem('profile'))
 	const resetForm = () => {
 		setCurrentId(0);
 		setFormData({
 			title: '',
-			parent: '',
+			// parent: '',
 			description: '',
 			selectedFile: '',
 			laughs: '',
@@ -42,7 +43,7 @@ const StoryInfo = ({
 				/>
 			</li>
 			<li>Description: {story.description}</li>
-			<li>Submitted by: {story.parent}</li>
+			<li>Submitted by: {story.writer}</li>
 			<p>{moment(story.createdAt).fromNow()}</p>
 			<p onClick={() => dispatch(addLaughs(story._id))}>😂{story.laughs} </p>
 			<button

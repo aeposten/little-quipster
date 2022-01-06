@@ -1,23 +1,21 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
+import { login, register } from '../actions/login';
 
-const Login = ({ handleLogin, user }) => {
+const Login = () => {
 	const dispatch = useDispatch();
-	const history= useHistory();
+	const history = useHistory();
+	const [parent, setParent] = useState(false);
 	const [formData, setFormData] = useState({
-		username: '',
+		email: '',
 		password: '',
 	});
 
-	const userInfo = {
-		username: formData.username,
-		password: formData.password,
-	};
-
-	// const resetForm = () => {
-	// 	setFormData({ username: '', password: '' });
+	// const parentInfo = {
+	// 	email: formData.email,
+	// 	password: formData.password,
 	// };
 
 	const handleChange = (e) => {
@@ -27,13 +25,16 @@ const Login = ({ handleLogin, user }) => {
 		});
 	};
 
-	const handleSubmit = (e) => {};
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		dispatch(login(formData, history));
+	};
 	const googleLoginSuccess = (res) => {
 		const result = res?.profileObj;
 		const token = res?.tokenId;
 		try {
 			dispatch({ type: 'AUTH', data: { result, token } });
-			history.push('/')
+			history.push('/');
 		} catch (error) {
 			console.log(error);
 		}
@@ -49,9 +50,9 @@ const Login = ({ handleLogin, user }) => {
 				<p>
 					<input
 						type="text"
-						name="username"
-						placeholder="Username"
-						value={formData.username}
+						name="email"
+						placeholder="Email Address"
+						value={formData.email}
 						onChange={handleChange}
 					/>
 				</p>

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 
 import { createStory, updateStory } from '../actions/stories';
@@ -11,12 +11,21 @@ const StoryForm = ({
 	setFormData,
 }) => {
 	const dispatch = useDispatch();
+	// const story = useSelector((state) =>
+	// 	currentId ? state.allStories.find((description) => description._id === currentId) : null
+	// );
+	// useEffect(() => {
+	// 	if (story) setFormData(story);
+	// }, [story]);
+
+	const parent = JSON.parse(localStorage.getItem('profile'));
 
 	const handleSubmit = () => {
+		// console.log(story)
 		if (currentId === 0) {
-			dispatch(createStory(formData));
+			dispatch(createStory({ ...formData, name: parent?.result?.name }));
 		} else {
-			dispatch(updateStory(currentId, formData));
+			dispatch(updateStory({ ...formData, name: parent?.result?.name }));
 		}
 	};
 
@@ -31,7 +40,6 @@ const StoryForm = ({
 		setCurrentId(0);
 		setFormData({
 			title: '',
-			parent: '',
 			description: '',
 			selectedFile: '',
 			laughs: '',
@@ -51,13 +59,13 @@ const StoryForm = ({
 					placeholder="Story Title"
 					onChange={handleChange}
 				/>
-				<input
+				{/* <input
 					type="text"
 					name="parent"
-					value={formData.parent}
-					placeholder="Parent Name"
+					value={formData.writer}
+					placeholder="SUbmitted By"
 					onChange={handleChange}
-				/>
+				/> */}
 				<input
 					type="text"
 					name="description"

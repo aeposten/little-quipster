@@ -18,21 +18,19 @@ const StoryList = ({
 	// 	dispatch(getStories());
 	// }, [dispatch]);
 
-
 	return (
 		<ul className="stories">
-			{allStories
-				.map((story) => (
-					<StoryCard
-						story={story}
-						key={story._id}
-						toggleVisibleForm={toggleVisibleForm}
-            currentId={currentId}
-            setCurrentId={setCurrentId}
-            formData={formData}
-            setFormData={setFormData}
-					/>
-				))}
+			{allStories.map((story) => (
+				<StoryCard
+					story={story}
+					key={story._id}
+					toggleVisibleForm={toggleVisibleForm}
+					currentId={currentId}
+					setCurrentId={setCurrentId}
+					formData={formData}
+					setFormData={setFormData}
+				/>
+			))}
 		</ul>
 	);
 };

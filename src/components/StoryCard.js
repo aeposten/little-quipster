@@ -24,7 +24,7 @@ export default function StoryCard({
 		setCurrentId(0);
 		setFormData({
 			title: '',
-			parent: '',
+			// parent: '',
 			description: '',
 			selectedFile: '',
 			laughs: '',

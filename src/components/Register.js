@@ -2,37 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
+import { login, register } from '../actions/login';
 
-const Register = ({ handleLogin, user }) => {
+const Register = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	// const [parent, setParent] = useState(false);
 	const [formData, setFormData] = useState({
-		first_name: '',
-		Last_name: '',
+		name: '',
 		email: '',
 		password: '',
 		password_confirmation: '',
-		avatar: '',
 	});
-
-	const newUser = {
-		first_name: formData.first_name,
-		last_name: formData.last_name,
-		email: formData.email,
-		password: formData.password,
-		password_confirmation: formData.password_confirmation,
-	};
-
-	const resetForm = () => {
-		setFormData({
-			first_name: '',
-			last_name: '',
-			email: '',
-			username: '',
-			password: '',
-			password_confirmation: '',
-		});
-	};
 
 	const handleChange = (e) => {
 		setFormData({
@@ -41,7 +22,11 @@ const Register = ({ handleLogin, user }) => {
 		});
 	};
 
-	const handleSubmit = (e) => {};
+	const handleSubmit = (e) => {
+			e.preventDefault();
+			dispatch(register(formData, history));
+	};
+
 	const googleLoginSuccess = (res) => {
 		const result = res?.profileObj;
 		const token = res?.tokenId;
@@ -63,16 +48,9 @@ const Register = ({ handleLogin, user }) => {
 				<p>
 					<input
 						type="text"
-						name="first_name"
+						name="name"
 						placeholder="First Name"
-						value={formData.first_name}
-						onChange={handleChange}
-					/>
-					<input
-						type="text"
-						name="last_name"
-						placeholder="Last Name"
-						value={formData.last_name}
+						value={formData.name}
 						onChange={handleChange}
 					/>
 				</p>
