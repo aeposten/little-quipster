@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useState,  useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addLaughs, updateStory } from '../api/requests';
 import { useSelector, useDispatch } from 'react-redux';
 import StoryInfo from './StoryInfo';
@@ -7,15 +7,20 @@ import StoryInfo from './StoryInfo';
 export default function StoryCard({
 	story,
 	toggleVisibleForm,
-	formData,
-	setFormData,
+	// formData,
+	// setFormData,
 	currentId,
 	setCurrentId,
 }) {
-
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const [infoVisible, setInfoVisible] = useState(false);
-
+	const [formData, setFormData] = useState({
+		title: '',
+		// parent: '',
+		description: '',
+		selectedFile: '',
+		laughs: ''
+	});
 	const toggleVisibleModal = () => {
 		setInfoVisible(!infoVisible);
 	};
@@ -24,7 +29,6 @@ export default function StoryCard({
 		setCurrentId(0);
 		setFormData({
 			title: '',
-			// parent: '',
 			description: '',
 			selectedFile: '',
 			laughs: '',
@@ -32,11 +36,16 @@ export default function StoryCard({
 	};
 	return (
 		<div className="story-list">
-			<li onClick={() => {toggleVisibleModal();}}>
+			<li
+				onClick={() => {
+					resetForm();
+					toggleVisibleModal();
+				}}
+			>
 				<img src={story.selectedFile} alt={story.title} className="story-pic" />
 				<h4 className="story-name">{story.title}</h4>
-        			</li>
-        <p>😂{story.laughs}</p>
+			</li>
+			<p>😂{story.laughs}</p>
 
 			{infoVisible && (
 				<>

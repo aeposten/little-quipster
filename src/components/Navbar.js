@@ -1,6 +1,11 @@
 import StoryForm from '../components/StoryForm';
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Link, useHistory, useLocation } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Link,
+	useHistory,
+	useLocation,
+} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useGoogleLogin } from 'react-google-login';
 
@@ -10,10 +15,10 @@ const NavBar = ({ toggleVisibleForm }) => {
 	);
 
 	const dispatch = useDispatch();
-  const location = useLocation();
+	const location = useLocation();
 	const history = useHistory();
 	//Set user when location changes
-  useEffect(() => {
+	useEffect(() => {
 		const token = parent?.token;
 		///JWT manual signup
 
@@ -39,7 +44,7 @@ const NavBar = ({ toggleVisibleForm }) => {
 
 					{parent ? (
 						<li>
-							<Link to="/profile">Profile</Link>
+							<Link to="/profile">Welcome {parent?.result?.name}!</Link>
 							<button onClick={handleLogout}>Logout</button>
 						</li>
 					) : (

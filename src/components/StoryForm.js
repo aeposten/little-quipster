@@ -21,7 +21,6 @@ const StoryForm = ({
 	const parent = JSON.parse(localStorage.getItem('profile'));
 
 	const handleSubmit = () => {
-		// console.log(story)
 		if (currentId === 0) {
 			dispatch(createStory({ ...formData, name: parent?.result?.name }));
 		} else {
@@ -59,13 +58,6 @@ const StoryForm = ({
 					placeholder="Story Title"
 					onChange={handleChange}
 				/>
-				{/* <input
-					type="text"
-					name="parent"
-					value={formData.writer}
-					placeholder="SUbmitted By"
-					onChange={handleChange}
-				/> */}
 				<input
 					type="text"
 					name="description"

@@ -23,7 +23,6 @@ const StoryInfo = ({
 		setCurrentId(0);
 		setFormData({
 			title: '',
-			// parent: '',
 			description: '',
 			selectedFile: '',
 			laughs: '',
@@ -43,10 +42,10 @@ const StoryInfo = ({
 				/>
 			</li>
 			<li>Description: {story.description}</li>
-			<li>Submitted by: {story.writer}</li>
+			<li>Submitted by: {story.name}</li>
 			<p>{moment(story.createdAt).fromNow()}</p>
 			<p onClick={() => dispatch(addLaughs(story._id))}>😂{story.laughs} </p>
-			<button
+			{/* <button
 				onClick={() => {
 					setCurrentId(story._id);
 					dispatch(updateStory(currentId, formData));
@@ -56,7 +55,7 @@ const StoryInfo = ({
 				}}
 			>
 				Edit Story
-			</button>
+			</button> */}
 
 			<li>
 				<button
