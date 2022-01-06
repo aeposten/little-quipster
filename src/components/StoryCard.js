@@ -45,7 +45,7 @@ export default function StoryCard({
 				<img src={story.selectedFile} alt={story.title} className="story-pic" />
 				<h4 className="story-name">{story.title}</h4>
 			</li>
-			<p>😂{story.laughs}</p>
+			<p>😂{story.laughs.length}</p>
 
 			{infoVisible && (
 				<>

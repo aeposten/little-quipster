@@ -40,13 +40,16 @@ const NavBar = ({ toggleVisibleForm }) => {
 					<Link to="/about">
 						<li>About</li>
 					</Link>
-					<li onClick={toggleVisibleForm}>Add a Story </li>
+					{/* <li onClick={toggleVisibleForm}>Add a Story </li> */}
 
 					{parent ? (
+						<>
+						<li onClick={toggleVisibleForm}>Add a Story </li>
 						<li>
 							<Link to="/profile">Welcome {parent?.result?.name}!</Link>
 							<button onClick={handleLogout}>Logout</button>
 						</li>
+						</>
 					) : (
 						<>
 							<Link to="/login">

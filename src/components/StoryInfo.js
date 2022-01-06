@@ -44,7 +44,7 @@ const StoryInfo = ({
 			<li>Description: {story.description}</li>
 			<li>Submitted by: {story.name}</li>
 			<p>{moment(story.createdAt).fromNow()}</p>
-			<p onClick={() => dispatch(addLaughs(story._id))}>😂{story.laughs} </p>
+			<p onClick={() => dispatch(addLaughs(story._id))}>😂{story.laughs.length} </p>
 			{/* <button
 				onClick={() => {
 					setCurrentId(story._id);
